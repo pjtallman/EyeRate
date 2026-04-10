@@ -1,0 +1,58 @@
+{
+    "id": "eyerate",
+    "version": "0.0.1",
+    "name": "EyeRate Financial Securities",
+    "description": "Financial security maintenance and yield tracking plugin.",
+    "entry_point": "src.eyerate.plugin.EyeRatePlugin",
+    "matika_version_min": "0.0.1",
+    "menu_items": [
+        {
+            "label_key": "item_securities",
+            "href": "/admin/securities",
+            "icon": "trending-up",
+            "roles": ["Admin"]
+        }
+    ],
+    "permissions": [
+        {
+            "page_path": "/admin/securities",
+            "page_type": "Maintenance",
+            "roles": {
+                "Admin": "FULL",
+                "User": "NONE"
+            }
+        }
+    ],
+    "settings_ui": {
+        "sections": [
+            {
+                "id": "data_providers",
+                "title_key": "heading_financial_security_endpoints",
+                "fields": [
+                    {
+                        "id": "financial_security_data_endpoint",
+                        "type": "select",
+                        "label_key": "label_active_endpoint",
+                        "options": [
+                            {"value": "yahoo", "label": "Matika Standard (Yahoo Scraper)"},
+                            {"value": "finnhub", "label": "Finnhub API"},
+                            {"value": "alphavantage", "label": "Alpha Vantage API"}
+                        ],
+                        "default": "yahoo"
+                    },
+                    {
+                        "id": "financial_security_data_api_key",
+                        "type": "textbox",
+                        "label": "API Key",
+                        "placeholder": "Enter API Key",
+                        "show_if": {
+                            "field": "financial_security_data_endpoint",
+                            "operator": "in",
+                            "values": ["finnhub", "alphavantage"]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -4,11 +4,13 @@
     {% for s in securities %}
     <tr data-id="{{ s.id }}" 
         {% for field in metadata.maintenance_panel.fields %}
-        data-{{ field.name | replace('_', '-') }}="{{ s[field.name].value if s[field.name].value is defined else (s[field.name] or '') }}"
+        {% set val = getattr(s, field.name) %}
+        data-{{ field.name | replace('_', '-') }}="{{ val.value if val.value is defined else (val or '') }}"
         {% endfor %}
     >
         {% for col in metadata.browse_panel.columns %}
-        <td>{{ s[col.name].value if s[col.name].value is defined else (s[col.name] or '') }}</td>
+        {% set val = getattr(s, col.name) %}
+        <td>{{ val.value if val.value is defined else (val or '') }}</td>
         {% endfor %}
     </tr>
     {% endfor %}
@@ -59,5 +61,5 @@
     <script id="metadata-json" type="application/json">
         {{ metadata | tojson }}
     </script>
-    <script src="/static/js/admin_securities.js" type="module"></script>
+    <script src="/static/eyerate/js/admin_securities.js" type="module"></script>
 {% endblock %}

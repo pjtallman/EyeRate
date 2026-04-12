@@ -31,16 +31,24 @@ class EyeRatePlugin(BaseAppLug):
         
         # 1. Handle Schema Migration
         EyeRateBase.metadata.create_all(bind=db.get_bind())
-        logger.info("EyeRate database tables verified/created.")
         
         # 2. Register Routes with prefix
         self.router.include_router(eyerate_router, prefix="/admin")
         
         # 3. Handle Static Assets
         from matika.main import app
+        # Resolves to eyerate/src/eyerate/static
         static_dir = os.path.join(os.path.dirname(__file__), "static")
         if os.path.exists(static_dir):
             app.mount("/static/eyerate", StaticFiles(directory=static_dir), name="eyerate_static")
+
+        # 4. Integrate Templates
+        if self.templates:
+            from jinja2 import FileSystemLoader
+            plugin_template_dir = os.path.join(os.path.dirname(__file__), "templates")
+            if isinstance(self.templates.env.loader, FileSystemLoader):
+                if plugin_template_dir not in self.templates.env.loader.searchpath:
+                    self.templates.env.loader.searchpath.append(plugin_template_dir)
 
         logger.info("EyeRate Plugin Loaded Successfully.")
 

@@ -25,7 +25,7 @@ class FinancialSecurity(Base):
     id = Column(Integer, primary_key=True, index=True)
     symbol = Column(String, unique=True, index=True, nullable=False)
     name = Column(String, nullable=False)
-    security_type = Column(SQLEnum(FinancialSecurityType), nullable=False)
+    financial_security_type = Column(SQLEnum(FinancialSecurityType), nullable=False)
     asset_class = Column(SQLEnum(AssetClass), nullable=True)
     
     previous_close = Column(String, nullable=True)

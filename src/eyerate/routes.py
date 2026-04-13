@@ -18,7 +18,7 @@ async def list_securities(request: Request, user: User = Depends(check_page_perm
     # 't' and 'templates' are provided by framework context_processor
     return request.app.state.templates.TemplateResponse(request, "admin_securities.html", {
         "title": "item_securities", "user": user, "securities": db.query(FinancialSecurity).all(),
-        "security_types": list(FinancialSecurityType), "asset_classes": list(AssetClass), 
+        "security_types": [e.value for e in FinancialSecurityType], "asset_classes": [e.value for e in AssetClass], 
         "metadata": load_metadata("securities", FinancialSecurity, metadata_dir=os.path.join(os.path.dirname(__file__), "metadata"))
     })
 

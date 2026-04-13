@@ -36,11 +36,10 @@ class EyeRatePlugin(BaseAppLug):
         self.router.include_router(eyerate_router, prefix="/admin")
         
         # 3. Handle Static Assets
-        from matika.main import app
         # Resolves to eyerate/src/eyerate/static
         static_dir = os.path.join(os.path.dirname(__file__), "static")
-        if os.path.exists(static_dir):
-            app.mount("/static/eyerate", StaticFiles(directory=static_dir), name="eyerate_static")
+        if os.path.exists(static_dir) and self.app:
+            self.app.mount("/static/eyerate", StaticFiles(directory=static_dir), name="eyerate_static")
 
         # 4. Integrate Templates
         if self.templates:

@@ -1,0 +1,8 @@
+milestone: "Milestone 1 - Initial refactor of eyerate out of rateeye"
+branch: "feat/milestone-1-Initial-refactor"
+description: "Initial refactor of eyerate out of rateeye"
+issues:
+  - title: "Initial refactor of eyerate out of rateeye"
+    labels: ["feature", "milestone-1"]
+    description: |
+      Initial refactor of eyerate out of rateeye

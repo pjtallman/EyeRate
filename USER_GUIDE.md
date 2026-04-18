@@ -1,3 +1,7 @@
+**EyeRate** | Version: **v0.0.1** | Copyright (c) 2026 Patrick James Tallman
+
+
+
 # EyeRate User Guide
 
 EyeRate is a financial security tracking plugin for the Matika framework. It allows you to manage a list of stocks, ETFs, and mutual funds with real-time data lookups.

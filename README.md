@@ -1,3 +1,7 @@
+**EyeRate** | Version: **v0.0.1** | Copyright (c) 2026 Patrick James Tallman
+
+
+
 # EyeRate (AppLug Plugin)
 
 EyeRate is the reference implementation of an AppLug plugin for the Matika Framework. It provides financial security maintenance, real-time data lookups, and yield tracking capabilities.

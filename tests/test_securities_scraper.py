@@ -1,11 +1,10 @@
 import pytest
-import json
-from unittest.mock import AsyncMock, patch, MagicMock
-from matika.securities.endpoints import YahooScraperEndpoint
-from matika.database import SecurityType, AssetClass
+from unittest.mock import patch, MagicMock
+from eyerate.endpoints import YahooScraperEndpoint
+from eyerate.models import FinancialSecurityType as SecurityType, AssetClass
 
 @pytest.mark.asyncio
-@patch("matika.securities.endpoints.AsyncSession")
+@patch("eyerate.endpoints.AsyncSession")
 async def test_yahoo_endpoint_search(mock_session):
     mock_response = MagicMock()
     mock_response.status_code = 200
@@ -25,7 +24,7 @@ async def test_yahoo_endpoint_search(mock_session):
     assert results[0]["type"] == "ETF"
 
 @pytest.mark.asyncio
-@patch("matika.securities.endpoints.yf.Ticker")
+@patch("eyerate.endpoints.yf.Ticker")
 async def test_yahoo_endpoint_lookup(mock_ticker):
     mock_ticker.return_value.info = {
         "symbol": "VOO",

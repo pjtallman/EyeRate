@@ -1,5 +1,6 @@
 import pytest
-from matika.database import Security, SecurityType, init_db
+from eyerate.models import FinancialSecurity as Security, FinancialSecurityType as SecurityType
+from matika.database import init_db
 
 def test_duplicate_symbol_prevention(client, test_admin, db):
     init_db(db)
@@ -18,7 +19,7 @@ def test_duplicate_symbol_prevention(client, test_admin, db):
     # Try to create the same symbol again
     resp = client.post("/admin/securities/create", data=data, follow_redirects=False)
     assert resp.status_code == 400
-    assert "already exists" in resp.json()["detail"]
+    assert "already exists" in resp.text
 
 def test_symbol_case_insensitivity(client, test_admin, db):
     init_db(db)

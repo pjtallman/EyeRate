@@ -1,0 +1,11 @@
+[
+    {
+        "parent_menu_id": "activities",
+        "items": [
+            {
+                "label_key": "item_securities",
+                "href": "/admin/securities"
+            }
+        ]
+    }
+]

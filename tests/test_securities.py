@@ -1,5 +1,6 @@
 import pytest
-from matika.database import Security, SecurityType, AssetClass, init_db
+from eyerate.models import FinancialSecurity as Security, FinancialSecurityType as SecurityType, AssetClass
+from matika.database import init_db
 
 def test_securities_list_basic(client, test_admin, db):
     init_db(db)
@@ -10,7 +11,7 @@ def test_securities_list_basic(client, test_admin, db):
     new_sec = Security(
         symbol="TEST", 
         name="Test Security", 
-        security_type=SecurityType.STOCK,
+        financial_security_type=SecurityType.STOCK,
         asset_class=AssetClass.LARGE_CAP_STOCK
     )
     db.add(new_sec)

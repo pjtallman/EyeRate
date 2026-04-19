@@ -1,37 +1,55 @@
-**EyeRate** | Version: **v0.0.1** | Copyright (c) 2026 Patrick James Tallman
+**EyeRate** | Version: **0.0.1** | Copyright (c) 2026 Patrick James Tallman
 
+# EyeRate - Financial Security Plugin for Matika
 
-
-# EyeRate (AppLug Plugin)
-
-EyeRate is the reference implementation of an AppLug plugin for the Matika Framework. It provides financial security maintenance, real-time data lookups, and yield tracking capabilities.
+EyeRate is a reference implementation of a Matika **AppLug** (plugin). it provides specialized functionality for tracking financial securities, fetching real-time market data, and calculating yields.
 
 ## Features
 
-- **Financial Security Maintenance:** Create, update, and delete financial securities (ETFs, Stocks, Mutual Funds).
-- **Multi-Source Data Fetching:** Supports Yahoo Finance (scraper), Finnhub API, and Alpha Vantage API.
-- **Bulk Operations:** Automated bulk creation and deletion of securities by ticker symbols.
-- **Metadata-Driven UI:** UI layout and form fields are defined using a standardized JSON grammar.
+- **Security Maintenance:** CRUD operations for stocks, bonds, ETFs, and mutual funds.
+- **Dynamic Data Sourcing:** Pluggable endpoint system supporting Yahoo Finance (scraper), Finnhub, and Alpha Vantage.
+- **Bulk Operations:** Automated discovery and creation of securities via ticker symbols.
+- **Permission Integration:** Pre-configured roles and permissions that hook into the Matika core RBAC.
+- **Custom UI:** Specialized templates for financial data visualization.
 
-## Folder Structure
+## Installation into Matika
 
-The EyeRate project follows the AppLug plugin standard for Matika.
+EyeRate is designed to be installed into a Matika host.
 
-```text
-/
-├── src/                    # Plugin source code root
-│   └── eyerate/            # Main EyeRate package
-│       ├── locales/        # Translation JSON files (en.json, es.json)
-│       ├── metadata/       # JSON metadata for the Maintenance Activity UI
-│       ├── static/         # Compiled JS and plugin-specific assets
-│       ├── templates/      # Jinja2 HTML templates for securities views
-│       ├── admin_securities.ts # TypeScript manager for securities maintenance
-│       ├── endpoints.py    # Financial data provider implementation (Scrapers/APIs)
-│       ├── lookup_dialog.ts # Shared TypeScript component for ticker lookups
-│       ├── models.py       # SQLAlchemy models for FinancialSecurity and enums
-│       └── routes.py       # FastAPI route definitions for securities endpoints
-└── tests/                  # Plugin-specific test suite
-    ├── test_securities.py  # Unit tests for CRUD operations
-    ├── test_securities_scraper.py # Tests for data fetching logic
-    └── test_symbol_uniqueness.py # Tests for data integrity and validation
+1. **Clone into Matika Plugins:**
+   Navigate to your Matika installation and clone EyeRate into the `plugins/` directory:
+   ```bash
+   cd matika/plugins
+   git clone https://github.com/pjtallman/eyerate.git eyerate
+   ```
+
+2. **Dependencies:**
+   Ensure your Matika environment has the required dependencies:
+   ```bash
+   pip install yfinance curl_cffi beautifulsoup4
+   ```
+
+3. **Restart Matika:**
+   Restart the Matika server. EyeRate will be automatically discovered and integrated.
+
+## Plugin Structure
+
+EyeRate demonstrates the standard Matika plugin layout:
+- `applug.json`: Defines the plugin ID, entry point (`eyerate.plugin.EyeRatePlugin`), and required permissions.
+- `eyerate_menu.json`: Adds the "Securities" maintenance page to Matika's "Activities" menu.
+- `src/eyerate/`: Python package containing routers, models, and logic.
+- `src/eyerate/templates/`: Jinja2 templates that are merged into the Matika template pool.
+
+## Development
+
+To run tests for EyeRate standalone (using the Matika test environment):
+```bash
+export PYTHONPATH=src:../matika/src
+python -m pytest tests/
 ```
+
+## Documentation
+- [User Guide](USER_GUIDE.md)
+
+## License
+Copyright (c) 2026 Patrick James Tallman. All Rights Reserved.

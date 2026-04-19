@@ -10,7 +10,9 @@
             "label_key": "item_securities",
             "href": "/admin/securities",
             "icon": "trending-up",
-            "roles": ["Admin"]
+            "roles": [
+                "Admin"
+            ]
         }
     ],
     "permissions": [
@@ -34,9 +36,18 @@
                         "type": "select",
                         "label_key": "label_active_endpoint",
                         "options": [
-                            {"value": "yahoo", "label": "Matika Standard (Yahoo Scraper)"},
-                            {"value": "finnhub", "label": "Finnhub API"},
-                            {"value": "alphavantage", "label": "Alpha Vantage API"}
+                            {
+                                "value": "yahoo",
+                                "label": "Matika Standard (Yahoo Scraper)"
+                            },
+                            {
+                                "value": "finnhub",
+                                "label": "Finnhub API"
+                            },
+                            {
+                                "value": "alphavantage",
+                                "label": "Alpha Vantage API"
+                            }
                         ],
                         "default": "yahoo"
                     },
@@ -48,7 +59,10 @@
                         "show_if": {
                             "field": "financial_security_data_endpoint",
                             "operator": "in",
-                            "values": ["finnhub", "alphavantage"]
+                            "values": [
+                                "finnhub",
+                                "alphavantage"
+                            ]
                         }
                     }
                 ]
